@@ -1,4 +1,4 @@
-module events_to_apb (input wire clk,
+module apb (input wire clk,
                       input wire reset,
                       input wire event_a_i,
                       input wire event_b_i,
