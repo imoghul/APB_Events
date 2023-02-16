@@ -1,4 +1,4 @@
-module apb_tb; reg rst, clock; reg event_a_i; reg event_b_i; reg event_c_i; wire apb_psel_o; wire apb_penable_o; wire [31:0] apb_paddr_o; wire apb_pwrite_o; wire [31:0] apb_pwdata_o; reg pready_i; reg apb_pready_i; events_to_apb DUT (.reset(rst), .clk(clock), .event_a_i(event_a_i), .event_b_i(event_b_i), .event_c_i(event_c_i), .apb_psel_o(apb_psel_o), .apb_penable_o(apb_penable_o), .apb_paddr_o(apb_paddr_o), .apb_pwrite_o(apb_pwrite_o), .apb_pwdata_o(apb_pwdata_o), .apb_pready_i(apb_pready_i));
+module apb_tb; reg rst, clock; reg event_a_i; reg event_b_i; reg event_c_i; wire apb_psel_o; wire apb_penable_o; wire [31:0] apb_paddr_o; wire apb_pwrite_o; wire [31:0] apb_pwdata_o; reg pready_i; reg apb_pready_i; apb DUT (.reset(rst), .clk(clock), .event_a_i(event_a_i), .event_b_i(event_b_i), .event_c_i(event_c_i), .apb_psel_o(apb_psel_o), .apb_penable_o(apb_penable_o), .apb_paddr_o(apb_paddr_o), .apb_pwrite_o(apb_pwrite_o), .apb_pwdata_o(apb_pwdata_o), .apb_pready_i(apb_pready_i));
 
 // assign apb_pready_i = pready_i;
 
@@ -36,9 +36,9 @@ initial begin
     #10 pready_i = 0;
 end
 
-always @ pready_i
-apb_pready_i = pready_i;
-
+always @ pready_i begin
+    apb_pready_i = pready_i;
+end
 initial begin
     #250 $finish;
 end

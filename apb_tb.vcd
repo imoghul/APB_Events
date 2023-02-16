@@ -1,0 +1,319 @@
+$date
+	Thu Feb 16 14:54:45 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module apb_tb $end
+$scope module DUT $end
+$var wire 32 ! apb_paddr [31:0] $end
+$var wire 32 " apb_paddr_o [31:0] $end
+$var wire 1 # apb_penable $end
+$var wire 1 $ apb_penable_o $end
+$var wire 1 % apb_pready_i $end
+$var wire 1 & apb_psel $end
+$var wire 1 ' apb_psel_o $end
+$var wire 32 ( apb_pwdata_o [31:0] $end
+$var wire 1 ) apb_pwrite $end
+$var wire 1 * apb_pwrite_o $end
+$var wire 1 + clk $end
+$var wire 1 , event_a_i $end
+$var wire 1 - event_a_sel $end
+$var wire 1 . event_b_i $end
+$var wire 1 / event_b_sel $end
+$var wire 1 0 event_c_i $end
+$var wire 1 1 event_c_sel $end
+$var wire 1 2 reset $end
+$var wire 4 3 nxt_event_c_count [3:0] $end
+$var wire 4 4 nxt_event_b_count [3:0] $end
+$var wire 4 5 nxt_event_a_count [3:0] $end
+$var wire 1 6 event_seen $end
+$var wire 1 7 apb_state_setup $end
+$var wire 1 8 apb_state_access $end
+$var wire 32 9 apb_pwdata [31:0] $end
+$var reg 32 : apb_pwdata_q [31:0] $end
+$var reg 4 ; event_a_count_q [3:0] $end
+$var reg 4 < event_b_count_q [3:0] $end
+$var reg 4 = event_c_count_q [3:0] $end
+$var reg 32 > nxt_paddr [31:0] $end
+$var reg 2 ? nxt_state [1:0] $end
+$var reg 32 @ paddr_q [31:0] $end
+$var reg 2 A state_q [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 A
+b10101011101110100000000000000000 @
+b0 ?
+b10101011101110100000000000000000 >
+b0 =
+b0 <
+b0 ;
+b0 :
+b0 9
+08
+07
+06
+b0 5
+b0 4
+b0 3
+12
+01
+00
+0/
+0.
+0-
+0,
+0+
+0*
+0)
+b0 (
+0'
+0&
+0%
+0$
+0#
+b0 "
+b0 !
+$end
+#5
+1+
+#10
+0+
+02
+#15
+b1 9
+1-
+1'
+1&
+17
+b1 A
+b1 ;
+b10 ?
+b1 5
+1+
+16
+1,
+#20
+0+
+#25
+b0 9
+0-
+b10101011101110100000000000000000 "
+b10101011101110100000000000000000 !
+b1 (
+b1 :
+b1 <
+b0 ;
+07
+1*
+1)
+1$
+1#
+18
+b10 A
+b0 5
+b10 4
+1+
+0,
+1.
+#30
+0+
+#35
+b1 4
+1+
+0.
+#40
+0+
+#45
+b0 ?
+1%
+1+
+#50
+0+
+#55
+b0 "
+b0 !
+0'
+0&
+b10111010111111110000000000000000 >
+0*
+0)
+0$
+0#
+08
+b0 A
+b10 <
+b1 ?
+0%
+b11 4
+1+
+1.
+#60
+0+
+#65
+b10 9
+b10 ?
+1/
+1'
+1&
+b1 =
+b10111010111111110000000000000000 @
+17
+b1 A
+b10111010111111110000000000000000 >
+b0 4
+b10 3
+1+
+0.
+10
+#70
+0+
+#75
+b0 9
+0/
+b10111010111111110000000000000000 "
+b10111010111111110000000000000000 !
+07
+1*
+1)
+1$
+1#
+18
+b10 A
+b0 <
+b10 (
+b10 :
+b1 3
+1+
+00
+#80
+0+
+#85
+b0 ?
+1%
+1+
+#90
+0+
+#95
+b11001010111111100000000000000000 >
+b0 "
+b0 !
+0'
+0&
+0*
+0)
+0$
+0#
+08
+b0 A
+b1 ?
+0%
+1+
+#100
+0+
+#105
+b1 9
+b0 3
+b10 ?
+11
+1'
+1&
+b11001010111111100000000000000000 @
+17
+b1 A
+1+
+#110
+0+
+#115
+b0 9
+01
+b11001010111111100000000000000000 "
+b11001010111111100000000000000000 !
+07
+1*
+1)
+1$
+1#
+18
+b10 A
+06
+b0 =
+b1 (
+b1 :
+1+
+#120
+0+
+#125
+1+
+#130
+0+
+#135
+b0 ?
+1%
+1+
+#140
+0+
+#145
+b0 "
+b0 !
+0'
+0&
+0*
+0)
+0$
+0#
+08
+b0 A
+b0 ?
+0%
+1+
+#150
+0+
+#155
+1+
+#160
+0+
+#165
+1+
+#170
+0+
+#175
+1+
+#180
+0+
+#185
+1+
+#190
+0+
+#195
+1%
+1+
+#200
+0+
+#205
+0%
+1+
+#210
+0+
+#215
+1+
+#220
+0+
+#225
+1+
+#230
+0+
+#235
+1+
+#240
+0+
+#245
+1+
+#250
+0+
