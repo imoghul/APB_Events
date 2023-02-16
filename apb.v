@@ -1,14 +1,14 @@
 module apb (input wire clk,
-                      input wire reset,
-                      input wire event_a_i,
-                      input wire event_b_i,
-                      input wire event_c_i,
-                      output wire apb_psel_o,
-                      output wire apb_penable_o,
-                      output wire [31:0] apb_paddr_o,
-                      output wire apb_pwrite_o,
-                      output wire [31:0] apb_pwdata_o,
-                      input wire apb_pready_i);
+            input wire reset,
+            input wire event_a_i,
+            input wire event_b_i,
+            input wire event_c_i,
+            output wire apb_psel_o,
+            output wire apb_penable_o,
+            output wire [31:0] apb_paddr_o,
+            output wire apb_pwrite_o,
+            output wire [31:0] apb_pwdata_o,
+            input wire apb_pready_i);
     
     localparam EVENT_A_ADDR = 32'hABBA_0000;
     localparam EVENT_B_ADDR = 32'hBAFF_0000;

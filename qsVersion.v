@@ -19,7 +19,6 @@ module events_to_apb (input wire clk,
     localparam STATE_ACCESS = 2'b10;
     
     reg [3:0] pendingA, pendingB, pendingC;
-    reg pending;
     reg [31:0] addr_to_send,addr;
     assign apb_paddr_o = addr;
     
@@ -33,27 +32,26 @@ module events_to_apb (input wire clk,
     reg[31:0] pwdata_o,pendings;
     assign apb_pwdata_o = pwdata_o;
     
-    reg pready_i;
     
     assign apb_pwrite_o = 1;
     
-    always @(posedge clk)
-        pready_i = apb_pready_i;
     
     // pending counter block
-    always @(event_a_i,event_b_i,event_c_i, negedge reset) begin
+    always @(negedge reset, posedge clk) begin
         if (reset) begin
             pendingA = 0;
             pendingB = 0;
             pendingC = 0;
         end
         else begin
-            pendingA = event_a_i ? pendingA+1:pendingA;
-            
-            pendingB = event_b_i ? pendingB+1:pendingB;
-            
-            pendingC = event_c_i ? pendingC+1:pendingC;
-            
+            if(event_a_i) pendingA <= pendingA+1;
+            else pendingA <= pendingA;
+
+            if(event_b_i) pendingB <= pendingB+1;
+            else pendingB <= pendingB;
+
+            if(event_c_i) pendingC <= pendingC+1;
+            else pendingC <= pendingC; 
         end
     end
     // state transition
@@ -62,7 +60,7 @@ module events_to_apb (input wire clk,
             sv <= STATE_IDLE;
             next_state <= 0;
             psel_o <= 0;
-            pready_i <= 0;
+            //pready_i <= 0;
             pwdata_o <= 0;
             pendings <= 0;
         end
@@ -70,6 +68,17 @@ module events_to_apb (input wire clk,
     
     // fsm
     always @* begin
+        // if (reset) begin
+        //     pendingA = 0;
+        //     pendingB = 0;
+        //     pendingC = 0;
+        // end
+        // else begin
+        //     pendingA = event_a_i ? pendingA+1:pendingA;
+        //     pendingB = event_b_i ? pendingB+1:pendingB;
+        //     pendingC = event_c_i ? pendingC+1:pendingC;
+        
+        
         case (sv)
             STATE_IDLE : begin
                 psel_o = 0;
@@ -83,14 +92,17 @@ module events_to_apb (input wire clk,
                 if (pendingA) begin
                     addr_to_send = EVENT_A_ADDR;
                     pendingA = pendingA - 1;
+                    pendings = pendingA;
                 end
                 else if (pendingB) begin
                     addr_to_send = EVENT_B_ADDR;
                     pendingB = pendingB-1;
+                    pendings = pendingB;
                 end
-                else if (|pendingC) begin
+                else if (pendingC) begin
                     addr_to_send = EVENT_C_ADDR;
                     pendingC = pendingC-1;
+                    pendings = pendingC;
                 end
                 else begin
                     addr_to_send = 0;
@@ -98,7 +110,7 @@ module events_to_apb (input wire clk,
                     pendingB = 0;
                     pendingC = 0;
                 end
-                pendings = pendingA+pendingB+pendingC;
+                // pendings = {28'b0000000000000000000000000000,pendingA+pendingB+pendingC};
                 next_state = STATE_ACCESS;
                 
                 
@@ -107,10 +119,11 @@ module events_to_apb (input wire clk,
                 penable_o = 1;
                 addr = addr_to_send;
                 pwdata_o = pendings;
-                next_state = pready_i ? STATE_IDLE : STATE_ACCESS;
+                next_state = apb_pready_i ? STATE_IDLE : STATE_ACCESS;
             end
             default: next_state = STATE_IDLE;
         endcase
+        // end
     end
     
     
